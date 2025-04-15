@@ -12,10 +12,10 @@ Pseudo code
 
 <!-- Create operate function that takes an operator and two numbers, then calls the operator function -->
 
-Create HTML calculator
+<!-- Create HTML calculator
     Number pad
     Display
-    Clear button
+    Clear button -->
 
 Create functions to populate display when buttons are clicked and store in a variable
 

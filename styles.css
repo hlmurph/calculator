@@ -6,26 +6,49 @@
 
 }
 
+.number {
+    height: 100%;
+}
+
+.num-row {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+}
+
+#calculator {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
 #display {
+    
+    text-align: right;
     background-color: greenyellow;
+    flex: 1;
 }
 
-#container {
+#keypad {
+    flex: 4;
     display: flex;
 }
 
-#numPad {
+#num-pad {
+    display: flex;
+    flex: 2;
+    flex-direction: column;
+}
+
+
+#operator-pad {
     display: flex;
     flex: 1;
     flex-direction: column;
 }
 
-#numRow {
+button {
     flex: 1;
-}
-
-#operatorPad {
-    display: flex;
-    flex: 1;
-    flex-direction: column;
+    font-size: larger;
 }
