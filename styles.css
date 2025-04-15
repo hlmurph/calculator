@@ -29,7 +29,7 @@
     background-color: greenyellow;
     border: 5px solid #004d00;
     border-radius: 15px;
-    margin: 10px;
+    margin: 10px 10px 30px 10px;
     flex: 1;
 }
 
@@ -56,5 +56,9 @@ button {
     font-size: xx-large;
     border: 3px solid #404040;
     border-radius: 10px;
-    /* background-color: #666666; */
+    background-color: #888484;
+}
+
+body {
+    margin: 0px;
 }

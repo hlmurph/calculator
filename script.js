@@ -4,6 +4,17 @@ let input1;
 let input2;
 let operation;
 
+const buttons = document.querySelectorAll('button');
+
+buttons.forEach((button) => {
+    button.addEventListener('mousedown', () => {
+        button.setAttribute('style', 'background: #9f9f9f;')
+    })
+    button.addEventListener('mouseup', () => {
+        button.setAttribute('style', 'background: #888484;')
+    })
+})
+
 function add(a, b) {
     return a + b;  
 }
