@@ -1,8 +1,10 @@
 const container = document.querySelector('#container');
+const display = document.querySelector('#display')
 
 let input1;
 let input2;
 let operation;
+let displayContent = '';
 
 const buttons = document.querySelectorAll('button');
 
@@ -12,6 +14,14 @@ buttons.forEach((button) => {
     })
     button.addEventListener('mouseup', () => {
         button.setAttribute('style', 'background: #888484;')
+    })
+    button.addEventListener('click', () => {
+        if (button.getAttribute('class') == 'number') {
+            displayContent += button.textContent;
+            display.textContent = displayContent;
+        } else {
+            let operator = button.getAttribute('id');
+        }
     })
 })
 
