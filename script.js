@@ -1,3 +1,5 @@
+const container = document.querySelector('#container');
+
 let input1;
 let input2;
 let operation;

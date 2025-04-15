@@ -1,0 +1,31 @@
+.number {
+
+}
+
+.operator {
+
+}
+
+#display {
+    background-color: greenyellow;
+}
+
+#container {
+    display: flex;
+}
+
+#numPad {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+}
+
+#numRow {
+    flex: 1;
+}
+
+#operatorPad {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+}
