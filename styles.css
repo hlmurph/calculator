@@ -24,7 +24,7 @@
 }
 
 #display {
-    
+    font-size: 90px;
     text-align: right;
     background-color: greenyellow;
     flex: 1;
@@ -50,5 +50,5 @@
 
 button {
     flex: 1;
-    font-size: larger;
+    font-size: xx-large;
 }
