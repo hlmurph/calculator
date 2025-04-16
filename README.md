@@ -17,7 +17,8 @@ Pseudo code
     Display
     Clear button -->
 
-Create functions to populate display when buttons are clicked and store in a variable
+<!-- Create functions to populate display when buttons are clicked and store in a variable -->
 
-Store first and second numbers in variables and call operator
-Update display with result
+<!-- Store first and second numbers in variables and call operator -->
+
+<!-- Update display with result -->
