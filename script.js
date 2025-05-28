@@ -15,12 +15,14 @@ let nextValue = false;
 const buttons = document.querySelectorAll('button');
 
 buttons.forEach((button) => {
+    // Change style so background color changes when clicked
     button.addEventListener('mousedown', () => {
         button.setAttribute('style', 'background: #9f9f9f;')
     })
     button.addEventListener('mouseup', () => {
         button.setAttribute('style', 'background: #888484;')
     })
+    // If the button is a number, add it to the display content, otherwise log the operator button that has been pressed
     button.addEventListener('click', () => {
         if (button.getAttribute('class') == 'number') {
             if (nextValue) {
