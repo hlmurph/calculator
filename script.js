@@ -1,10 +1,15 @@
-const container = document.querySelector('#container');
+// Display is the div in the html that will show content
 const display = document.querySelector('#display')
 
+// Variables to store entered values and operations to be performed on those values
 let input1;
 let input2;
 let operator;
+
+// Variable for the content of the display
 let displayContent = '';
+
+// Bool to indicate whether an initial value has been entered
 let nextValue = false;
 
 const buttons = document.querySelectorAll('button');
@@ -65,7 +70,6 @@ function operate(operation, a, b) {
                 input2 = false;
             }
             return add(a, b);
-            break;
         case '-':
             storeVal(displayContent);
             operator = '-';
@@ -76,7 +80,6 @@ function operate(operation, a, b) {
                 input2 = false;
             }
             return sub(a, b);
-            break;
         case '*':
             storeVal(displayContent);
             operator = '*';
@@ -87,7 +90,6 @@ function operate(operation, a, b) {
                 input2 = false;
             }
             return mult(a, b);
-            break;
         case '/':
             storeVal(displayContent);
             operator = '/';
@@ -98,10 +100,8 @@ function operate(operation, a, b) {
                 input2 = false;
             }
             return div(a, b);
-            break;
         case '=':
             operate(operator, input1, input2);
-            break;
     }
 }
 
