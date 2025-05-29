@@ -5,6 +5,11 @@
 
 .number {
     height: 100%;
+    flex-grow: 2;
+}
+.decimal {
+    height: 100%;
+    flex-grow: 1;
 }
 
 .num-row {

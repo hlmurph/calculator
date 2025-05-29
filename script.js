@@ -5,6 +5,8 @@ let operand2 = '';
 let operator = '';
 let displayValue = '';
 let evaluationComplete = false;
+let operand1ContainsDecimal = false;
+let operand2ContainsDecimal = false;
 const buttons = document.querySelectorAll('button');
 const display = document.querySelector('#display');
 
@@ -28,6 +30,9 @@ buttons.forEach((button) => {
             case 'operator':
                 handleOperatorClick(button.textContent);
                 break;
+            case 'decimal':
+                handleDecimalClick(button.textContent);
+                break;
         }
     });
 });
@@ -50,6 +55,9 @@ function div(a, b) {
 }
 
 function updateDisplay() {
+    if ((displayValue.toString()).length > 10) {
+        displayValue = Number(displayValue.toString()).toFixed(9);
+    }
     display.textContent = displayValue;
 }
 
@@ -84,40 +92,72 @@ function handleOperatorClick(buttonText) {
 
     // All other operators
     if (evaluationComplete) {
-        operand1 = displayValue;
-        operand2 = '';
+        operandShift();
         evaluationComplete = false;
     } else if (operand2) {
         operate(operator, operand1, operand2);
-        operand1 = displayValue;
-        operand2 = '';
+        operandShift();
         evaluationComplete = false;
     }
     operator = buttonText;
 }
 
+function handleDecimalClick() {
+    if (evaluationComplete) {
+        clear();
+    }
+
+    if (!operator) {
+        if (operand1ContainsDecimal === true) {
+            return;
+        }
+        operand1 += '.';
+        displayValue = operand1;
+        operand1ContainsDecimal = true;
+    } else {
+        if (operand2ContainsDecimal === true) {
+            return;
+        }
+        operand2 += '.';
+        displayValue = operand2;
+        operand2ContainsDecimal = true;
+    }
+    updateDisplay();
+}
+
 function operate(operation, a, b) {
     switch (operation) {
         case '+':
-            displayValue = add(parseInt(a), parseInt(b));
+            displayValue = add(Number(a), Number(b));
             break;
         case '-':
-            displayValue = sub(parseInt(a), parseInt(b));
+            displayValue = sub(Number(a), Number(b));
             break;
         case '*':
-            displayValue = mult(parseInt(a), parseInt(b));
+            displayValue = mult(Number(a), Number(b));
             break;
         case '/':
-            if (parseInt(b) === 0) {
+            if (Number(b) === 0) {
                 displayValue = "Nice try. Not today!"
                 break;
             }
-            displayValue = div(parseInt(a), parseInt(b));
+            displayValue = div(Number(a), Number(b));
             break;
     }
 
     evaluationComplete = true;
     updateDisplay();
+}
+
+function operandShift() {
+    operand1 = displayValue;
+    operand2 = '';
+    operand2ContainsDecimal = false;
+    if ((operand1.toString()).search('.')) {
+        operand1ContainsDecimal = true;
+    } else {
+        operand1ContainsDecimal = false;
+    }
 }
 
 function clear() {
@@ -126,5 +166,7 @@ function clear() {
     operand2 = "";
     displayValue = "";
     evaluationComplete = false;
+    operand1ContainsDecimal = false;
+    operand2ContainsDecimal = false;
     updateDisplay();
 }
