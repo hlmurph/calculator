@@ -1,120 +1,122 @@
-// Display is the div in the html that will show content
-const display = document.querySelector('#display')
 
-// Variables to store entered values and operations to be performed on those values
-let input1;
-let input2;
-let operator;
-
-// Variable for the content of the display
-let displayContent = '';
-
-// Bool to indicate whether an initial value has been entered
-let nextValue = false;
-
+// region Init
+let operand1 = '';
+let operand2 = '';
+let operator = '';
+let displayValue = '';
+let evaluationComplete = false;
 const buttons = document.querySelectorAll('button');
+const display = document.querySelector('#display');
+
+clear();
 
 buttons.forEach((button) => {
     // Change style so background color changes when clicked
     button.addEventListener('mousedown', () => {
         button.setAttribute('style', 'background: #9f9f9f;')
-    })
+    });
+
     button.addEventListener('mouseup', () => {
         button.setAttribute('style', 'background: #888484;')
-    })
-    // If the button is a number, add it to the display content, otherwise log the operator button that has been pressed
+    });
+
     button.addEventListener('click', () => {
-        if (button.getAttribute('class') == 'number') {
-            if (nextValue) {
-                displayContent = '';
-                display.textContent = '';
-                nextValue = false;
-            }
-            displayContent += button.textContent;
-            display.textContent = displayContent;
-        } else {
-            let operator = button.getAttribute('id');
-            operate(operator, input1, input2);
+        switch (button.getAttribute('class')) {
+            case 'number':
+                handleDigitClick(button.textContent);
+                break;
+            case 'operator':
+                handleOperatorClick(button.textContent);
+                break;
         }
-    })
-})
+    });
+});
+// endregion
 
 function add(a, b) {
-    return a + b;  
+    return a + b;
 }
+
 function sub(a, b) {
     return a - b;
 }
+
 function mult(a, b) {
     return a * b;
 }
+
 function div(a, b) {
     return a / b;
 }
 
-function operate(operation, a, b) {
-    nextValue = true;
-    switch (operation) {
-        case 'clear':
-            input1 = '';
-            input2 = '';
-            nextValue = false;
-            displayContent = '';
-            display.textContent = '';
-            logVals();
-        case '+':
-            storeVal(displayContent);
-            operator = '+';
-            if (input2) {
-                input1 = input1 + input2;
-                displayContent = input1;
-                display.textContent = input1;
-                input2 = false;
-            }
-            return add(a, b);
-        case '-':
-            storeVal(displayContent);
-            operator = '-';
-            if (input2) {
-                input1 = input1 - input2;
-                displayContent = input1;
-                display.textContent = input1;
-                input2 = false;
-            }
-            return sub(a, b);
-        case '*':
-            storeVal(displayContent);
-            operator = '*';
-            if (input2) {
-                input1 = input1 * input2;
-                displayContent = input1;
-                display.textContent = input1;
-                input2 = false;
-            }
-            return mult(a, b);
-        case '/':
-            storeVal(displayContent);
-            operator = '/';
-            if (input2) {
-                input1 = input1 / input2;
-                displayContent = input1;
-                display.textContent = input1;
-                input2 = false;
-            }
-            return div(a, b);
-        case '=':
-            operate(operator, input1, input2);
-    }
+function updateDisplay() {
+    display.textContent = displayValue;
 }
 
-function storeVal(num) {
-    if (!input1) {
-        input1 = Number(num);
+function handleDigitClick(buttonText) {
+    if (evaluationComplete) {
+        clear();
+    }
+
+    if (!operator) {
+        operand1 += buttonText;
+        displayValue = operand1;
     } else {
-        input2 = Number(num);
+        operand2 += buttonText;
+        displayValue = operand2;
     }
+
+    updateDisplay();
 }
 
-function logVals() {
-    console.log(`input1 = ${input1}\ninput2 = ${input2}`)
+function handleOperatorClick(buttonText) {
+    // When = clicked
+    if (buttonText === "=") {
+        if (evaluationComplete) {
+            operand1 = displayValue;
+        }
+        operate(operator, operand1, operand2);
+        return;
+    } else if (buttonText === "Clear") {
+        clear();
+        return;
+    }
+
+    // All other operators
+    if (evaluationComplete) {
+        operand1 = displayValue;
+        operand2 = '';
+        evaluationComplete = false;
+    }
+    operator = buttonText;
+}
+
+function operate(operation, a, b) {
+    console.log(a, operation, b);
+    switch (operation) {
+        case '+':
+            displayValue = add(parseInt(a), parseInt(b));
+            break;
+        case '-':
+            displayValue = sub(parseInt(a), parseInt(b));
+            break;
+        case '*':
+            displayValue = mult(parseInt(a), parseInt(b));
+            break;
+        case '/':
+            displayValue = div(parseInt(a), parseInt(b));
+            break;
+    }
+
+    evaluationComplete = true;
+    updateDisplay();
+}
+
+function clear() {
+    operator = "";
+    operand1 = "";
+    operand2 = "";
+    displayValue = "";
+    evaluationComplete = false;
+    updateDisplay();
 }
