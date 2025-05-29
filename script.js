@@ -87,12 +87,16 @@ function handleOperatorClick(buttonText) {
         operand1 = displayValue;
         operand2 = '';
         evaluationComplete = false;
+    } else if (operand2) {
+        operate(operator, operand1, operand2);
+        operand1 = displayValue;
+        operand2 = '';
+        evaluationComplete = false;
     }
     operator = buttonText;
 }
 
 function operate(operation, a, b) {
-    console.log(a, operation, b);
     switch (operation) {
         case '+':
             displayValue = add(parseInt(a), parseInt(b));
@@ -104,6 +108,10 @@ function operate(operation, a, b) {
             displayValue = mult(parseInt(a), parseInt(b));
             break;
         case '/':
+            if (parseInt(b) === 0) {
+                displayValue = "Nice try. Not today!"
+                break;
+            }
             displayValue = div(parseInt(a), parseInt(b));
             break;
     }
