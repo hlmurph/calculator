@@ -33,6 +33,9 @@ buttons.forEach((button) => {
             case 'decimal':
                 handleDecimalClick(button.textContent);
                 break;
+            case 'backspace':
+                handleBackspaceClick();
+                break;
         }
     });
 });
@@ -99,7 +102,10 @@ function handleOperatorClick(buttonText) {
         operandShift();
         evaluationComplete = false;
     }
-    operator = buttonText;
+
+    if (buttonText != "Backspace") {
+        operator = buttonText;
+    }
 }
 
 function handleDecimalClick() {
@@ -123,6 +129,16 @@ function handleDecimalClick() {
         operand2ContainsDecimal = true;
     }
     updateDisplay();
+}
+
+function handleBackspaceClick() {
+    displayValue = displayValue.slice(0, -1);
+    updateDisplay();
+    if (!operator) {
+        operand1 = operand1.slice(0, -1);
+    } else {
+        operand2 = operand2.slice(0, -1);
+    }
 }
 
 function operate(operation, a, b) {
