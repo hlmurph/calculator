@@ -7,12 +7,34 @@ let displayValue = '';
 let evaluationComplete = false;
 let operand1ContainsDecimal = false;
 let operand2ContainsDecimal = false;
+let buttonToPress
 const buttons = document.querySelectorAll('button');
 const display = document.querySelector('#display');
 
 clear();
 
+
 buttons.forEach((button) => {
+
+    document.addEventListener('keydown', function (event) {
+
+
+        // Add listeners for keyboard
+        buttonToPress = button.textContent;
+
+        if (button.textContent === '=') {
+            buttonToPress = 'Enter';
+        } else if (button.textContent === 'Backspace') {
+            buttonToPress = 'Backspace';
+        } else if (button.textContent === 'Clear') {
+            buttonToPress = 'c';
+        }
+
+            if (event.key === buttonToPress) {
+                document.getElementById(`${buttonToPress}`).click();
+            }
+        })
+
     // Change style so background color changes when clicked
     button.addEventListener('mousedown', () => {
         button.setAttribute('style', 'background: #9f9f9f;')
@@ -23,6 +45,8 @@ buttons.forEach((button) => {
     });
 
     button.addEventListener('click', () => {
+
+
         switch (button.getAttribute('class')) {
             case 'number':
                 handleDigitClick(button.textContent);
