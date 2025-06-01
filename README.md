@@ -1,24 +1,9 @@
 # calculator
 
-Pseudo code
+The Odin Project calculator
 
-<!-- Create functions for operators
-    Add
-    Subrtact
-    Multiply
-    Divide -->
+This is a web based calculator, used to demonstrate basic understanding of Javascript, html, and CSS.
 
-<!-- Create variables to update display -->
+Requirements for this project may be found at: https://www.theodinproject.com/lessons/foundations-calculator
 
-<!-- Create operate function that takes an operator and two numbers, then calls the operator function -->
-
-<!-- Create HTML calculator
-    Number pad
-    Display
-    Clear button -->
-
-<!-- Create functions to populate display when buttons are clicked and store in a variable -->
-
-<!-- Store first and second numbers in variables and call operator -->
-
-<!-- Update display with result -->
+all of the extra credit options were employed, and the design is meant to scale with the viewport window through flexbox.
